@@ -28,7 +28,7 @@ const addBlogPost = (dispatch) => {
   return async (title, content, callback) => {
     await jsonServer.post('blogposts', { title: title, content: content })
     // Could have put get_blogposts call here to update but useEffect on Index Screen now calls it everytime that screen is re-visited
-    if (callback) {
+    if (callback) {  // Makes sure api save happens before navigating away
       callback();
     };
   };
@@ -57,7 +57,7 @@ const editBlogPost = (dispatch) => {
         content: content
       }
     });
-    if (callback) {
+    if (callback) {  // Makes sure api save happens before navigating away
       callback();
     };
   }
