@@ -1,10 +1,22 @@
-import React, { useContext } from 'react';
-import { View, Text, StyleSheet, FlatList, Button, TouchableOpacity } from 'react-native';
+import React, { useContext, useEffect } from 'react';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { Context } from '../context/BlogContext';
 import { Feather } from '@expo/vector-icons';
 
 const IndexScreen = ({ navigation }) => {
-  const { state, deleteBlogPost } = useContext(Context);
+  const { state, deleteBlogPost, getBlogPosts } = useContext(Context);
+
+  useEffect(() => {
+    getBlogPosts(); // Runs once first time screen is mounted
+
+    const listener = navigation.addListener('didFocus', () => {  // Runs everytime one returns to Index Screen
+      getBlogPosts();
+    });
+
+    return () => {  // Removes the listener right before Index is removed/used for last time (to clean up memory leakage)
+      listener.remove();
+    };
+  }, []);
 
   return (
     <View>

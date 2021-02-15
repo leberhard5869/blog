@@ -21,7 +21,7 @@ const navigator = createStackNavigator({
 
 const App = createAppContainer(navigator);
 
-export default () => {
+export default () => { // Enables use of Context
   return (
     <Provider>
       <App />

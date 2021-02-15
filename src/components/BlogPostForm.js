@@ -19,7 +19,7 @@ const BlogPostForm = ({ onSubmit, initialValues }) => {
   );
 };
 
-BlogPostForm.defaultProps = {
+BlogPostForm.defaultProps = {  // Needed as initialValues are only present when comp is used by Edit Screen (not Create), would be undefined and cause error otherwise
   initialValues: {
     title: '',
     content: ''
